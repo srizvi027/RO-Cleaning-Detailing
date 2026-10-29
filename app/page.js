@@ -3,7 +3,11 @@ import Loader from "../components/Loader";
 import Nav from "../components/Nav";
 import { BOOKING_URL, SOCIALS, HOURS, SERVICES, WORK } from "../lib/content";
 
-const ext = { target: "_blank", rel: "noopener noreferrer" };
+const bookingLink = (service) => ({
+  href: service ? `${BOOKING_URL}?service=${encodeURIComponent(service)}` : BOOKING_URL,
+  target: "_blank",
+  rel: "noopener noreferrer",
+});
 
 export default function Home() {
   return (
@@ -19,7 +23,7 @@ export default function Home() {
             <h1>Detailing that makes every drive feel new.</h1>
             <p className="lede">Premium mobile car detailing with meticulous attention to every surface, inside and out.</p>
             <div className="btns">
-              <a className="btn" href={BOOKING_URL} {...ext}>Book your detail</a>
+              <a className="btn" {...bookingLink()}>Book your detail</a>
               <a className="btn btn-ghost" href="#work">Explore our work</a>
             </div>
           </div>
@@ -37,7 +41,7 @@ export default function Home() {
                   <p>{s.text}</p>
                   <div className="row-end">
                     <span className="price"><small>Starting at</small>{s.price}</span>
-                    <a className="link" href={BOOKING_URL} {...ext}>Book this service<span className="sr"> — {s.name}</span></a>
+                    <a className="link" {...bookingLink(s.name)}>Book this service<span className="sr"> — {s.name}</span></a>
                   </div>
                 </li>
               ))}
@@ -78,7 +82,7 @@ export default function Home() {
           <div className="wrap hero-copy">
             <h2>Your car deserves the RO treatment.</h2>
             <p className="lede">Ready to give your vehicle the attention it deserves?</p>
-            <a className="btn" href={BOOKING_URL} {...ext}>Book your appointment</a>
+            <a className="btn" {...bookingLink()}>Book your appointment</a>
           </div>
         </section>
       </main>
@@ -89,7 +93,7 @@ export default function Home() {
           <div>
             <h2 className="h-sm">Thoughtful detailing. Exceptional finish.</h2>
             <p>Hours: {HOURS}</p>
-            <p><a className="link" href={BOOKING_URL} {...ext}>Book online</a></p>
+            <p><a className="link" {...bookingLink()}>Book online</a></p>
             {SOCIALS.length > 0 && <p className="socials">{SOCIALS.map((s) => <a key={s.href} className="link" href={s.href} {...ext}>{s.label}</a>)}</p>}
           </div>
         </div>
